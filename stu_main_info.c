@@ -2,14 +2,14 @@
 //主界面及功能调用
 int main()
 {
-    int size=0;
+    //int size=0;
     LinkList L;
     L=(LNode *)malloc(sizeof(LNode));
     if(L==NULL)
     return -1;
     L->next=NULL;
     LNode *r=L;
-    get_from_file(L);
+    get_from_file(L,&r);
 
     //存在重名
     SNLinkList Lsame;
@@ -39,7 +39,7 @@ int main()
             int sub_op;
             do
             {
-                AddStu(L,&r,&size);
+                AddStu(L,&r);
                 printf("继续添加请按“1”,返回菜单请按“0”\n");
                 scanf("%d",&sub_op); 
                 if(sub_op!=1&&sub_op!=0)
@@ -48,6 +48,7 @@ int main()
                     sub_op=0;
                 }   
             } while (sub_op==1);
+
             printf("退出添加学生功能,返回菜单\n");
             break;
         }
@@ -56,12 +57,13 @@ int main()
         {
             if(L->next==NULL)
             {
-                printf("系统中无可查询信息\n");
+                printf("系统中无可显示的学生信息\n");
                 break;
             }
             else
             {
             int op_print;
+            int size=CountStu(L);
             printf("\n");
             printf("请选择打印方式\n");
             printf("按录入顺序打印请按“1”\n");
@@ -70,31 +72,38 @@ int main()
             printf("按学号由高到低打印请按“4”\n");
             printf("按学号由低到高打印请按“5”\n");
             scanf("%d",&op_print);
-            printf("学生信息如下:\n");
+            
             if(op_print==1)
             {
+                printf("学生信息如下:\n");
                 PrintAllStu(L);
             }
             else if(op_print==2)
             {
+                printf("学生信息如下:\n");
                 PrintScore_HightoLow(L,size);
             }
             else if(op_print==3)
             {
+                printf("学生信息如下:\n");
                 PrintScore_LowtoHigh(L,size);
             }
             else if(op_print==4)
             {
+                printf("学生信息如下:\n");
                 PrintID_HightoLow(L,size);
             }
             else if(op_print==5)
             {
+                printf("学生信息如下:\n");
                 PrintID_LowtoHigh(L,size);
             }
             else
             {
                 printf("选择错误\n");
+                break;
             }
+            printf("学生人数共计%d人\n",size);
             break;
             }
         }
@@ -126,14 +135,15 @@ int main()
         }
         case 4:
         {
-            if(L->next==NULL)
-            {
-                printf("系统中无可修改信息\n");
-                break;
-            }
+            
             int sub_op;
             do{
-
+                //判空
+                if(L->next==NULL)
+                {
+                    printf("系统中无可删除信息\n");
+                    break;
+                }
                 int ans4=ChangeScore(L,Lsame);
                 if(ans4)
                 printf("学生成绩修改并保存成功\n");
@@ -153,18 +163,23 @@ int main()
         }
         case 5:
         {
-            //判空
-            if(L->next==NULL)
-            {
-                printf("系统中无可删除信息\n");
-                break;
-            }
+            
             int sub_op;
             do{
-
+                //判空
+                if(L->next==NULL)
+                {
+                    printf("系统中无可删除信息\n");
+                    break;
+                }
                 int ans5=DelStu_name(L,Lsame);
                 if(!ans5)
                 printf("操作失败\n");
+                if(L->next==NULL)
+                {
+                    printf("系统中无可再删除信息\n");
+                    break;
+                }
                 printf("继续删除请按“1”,返回菜单请按“0”\n");
                 scanf("%d",&sub_op);
                 if(sub_op!=1&&sub_op!=0)
@@ -202,11 +217,46 @@ int main()
         }
         case 7:
         {
+            int count=CountStu(L);
+            printf("系统中学生数量总计为%d\n",count);
             break;
         }
+        case 8:
+        {
+            //判空
+            if(L->next==NULL)
+            {
+                printf("系统中无可删除信息\n");
+                break;
+            }
+            printf("请您确定是否删除全部学生信息\n");
+            printf("确定请按“1”,返回菜单请按“0”\n");
+            int op;
+            scanf("%d",&op);
+            if(op!=1&&op!=0)
+            {
+                printf("选择异常\n");
+            }
+            else if(op==1)
+            {
+                int ans=Clear(L);
+                save_file(L);
+                if(ans)
+                {
+                    printf("清空成功\n");
+                }
+            }
+            break;
+        }
+        case 0:
+        {
+            save_file(L);
+            return 0;
+        }
         default:
+            printf("选择异常\n");
             break;
         }
     }
-    return 0;
+    
 }

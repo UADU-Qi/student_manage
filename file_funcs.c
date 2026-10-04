@@ -25,7 +25,7 @@ int save_file(LinkList L)
     return 1;
 }
 //从文件获取已保存的学生信息
-int get_from_file(LinkList L)
+int get_from_file(LinkList L,LNode **r)
 {
     FILE *fp=fopen("stu_manage.txt","rb");
     if(fp==NULL)
@@ -41,7 +41,7 @@ int get_from_file(LinkList L)
         free(q);
     }
 
-    LNode *r=L;
+    //LNode *r=L;
     Stu temp;
     while(fread(&temp,sizeof(Stu),1,fp)==1)
     {
@@ -54,8 +54,8 @@ int get_from_file(LinkList L)
         
         newnode->data=temp;
         newnode->next=NULL;
-        r->next=newnode;
-        r=newnode;
+        (*r)->next=newnode;
+        (*r)=newnode;
     }
     fclose(fp);
     return 1;

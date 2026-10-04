@@ -30,12 +30,12 @@ int SameName(char samenames[30],LinkList L,SNLinkList Lsame);
 // }SCNode,*SCLinkList;
 
 //从文件中导入保存过的学生信息
-int get_from_file(LinkList L);
+int get_from_file(LinkList L,LNode **r);
 //主页面
 void welcome_ops();
 int save_file(LinkList L);
 //1. 添加学生
-int AddStu(LinkList L,LNode **r,int *size);
+int AddStu(LinkList L,LNode **r);
 //2. 显示所有学生信息
 int PrintAllStu(LinkList L);
 void PrintScore_HightoLow(LinkList L,int size);
@@ -52,6 +52,8 @@ int DelStu_name(LinkList L,SNLinkList Lsame);
 //6. 按成绩查询
 int FindScoreStu(LinkList L,LinkList Lsort);
 //7. 统计功能
-
-//0. 退出系统
+int CountStu(LinkList L);
+//8.清空系统全部学生信息
+int Clear(LinkList L);
+//0. 关闭程序
 #endif

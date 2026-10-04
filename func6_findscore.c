@@ -45,11 +45,12 @@ int FindScoreStu(LinkList L,LinkList Lsort)
     LNode *r=Lsort;
     int find=0;
     int cntstu=0;
-    printf("学生名单如下:\n");
+    
     while(p!=NULL)
     {
         if(p->data.score<=findscoremax&&p->data.score>=findscoremin)
         {
+            printf("学生名单如下:\n");
             printf("学生姓名:%s\n学生学号:%d\n学生成绩:%d\n",p->data.name,p->data.id,p->data.score);
             printf("========================\n");
             cntstu++;
@@ -69,6 +70,7 @@ int FindScoreStu(LinkList L,LinkList Lsort)
     }
     else
     {
+        printf("该分数段学生共计%d人\n",cntstu);
         int sort_op;
         printf("按成绩排序请按“1”,无需请按“0”\n");
         scanf("%d",&sort_op);
@@ -91,7 +93,7 @@ int FindScoreStu(LinkList L,LinkList Lsort)
             printf("选择异常\n");
             return find;  
             }
-            else if(op)
+            else if(op==1)
             {
                 PrintScore_HightoLow(Lsort,cntstu);
             }
