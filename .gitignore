@@ -1,0 +1,15 @@
+#编译产物
+info
+*.out
+*.o
+*.dSYM
+
+#VSCode本地配置
+.vscode/
+
+#程序运行生成的数据文件
+stu_main_info
+
+
+#Mac系统隐藏垃圾
+.DS_Store
