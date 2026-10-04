@@ -11,6 +11,7 @@ void welcome_ops()
     printf("6. 按成绩查询\n");
     printf("7. 统计人数功能\n");
     printf("8. 清空系统内全部学生信息\n");
+    printf("9. 修改学生姓名\n");
     printf("0. 关闭程序\n");
     printf("========================\n");
     printf("请输入你的选择：");

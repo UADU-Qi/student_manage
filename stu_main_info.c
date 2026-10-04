@@ -248,6 +248,32 @@ int main()
             }
             break;
         }
+        case 9:
+        {
+            int sub_op;
+            do{
+                //判空
+                if(L->next==NULL)
+                {
+                    printf("系统中无可删除信息\n");
+                    break;
+                }
+                int ans9=ChangeName(L,Lsame);
+                if(ans9)
+                printf("学生姓名修改并保存成功\n");
+                else
+                printf("操作失败\n");
+                printf("继续更改请按“1”,返回菜单请按“0”\n");
+                scanf("%d",&sub_op);
+                if(sub_op!=1&&sub_op!=0)
+                {
+                    printf("选择异常\n");
+                    sub_op=0;
+                }
+            }while(sub_op==1);
+            printf("退出修改学生姓名功能,返回菜单\n");
+            break;
+        }
         case 0:
         {
             save_file(L);

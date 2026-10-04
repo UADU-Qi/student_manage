@@ -55,5 +55,7 @@ int FindScoreStu(LinkList L,LinkList Lsort);
 int CountStu(LinkList L);
 //8.清空系统全部学生信息
 int Clear(LinkList L);
+//9.修改学生姓名
+int ChangeName(LinkList L,SNLinkList Lsame);
 //0. 关闭程序
 #endif
